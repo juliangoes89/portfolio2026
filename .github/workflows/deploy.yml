@@ -20,6 +20,7 @@ jobs:
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            echo "Deploying Next.js application..."
             cd /var/www/portfolio2026
             git pull
             npm install --production
