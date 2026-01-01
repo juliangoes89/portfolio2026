@@ -1,6 +1,10 @@
 import Image from "next/image";
+import { wpClient } from "@/lib/wpClient";
+import { GET_POSTS } from "@/lib/queries/getPosts";
 
-export default function Home() {
+export default async function Home() {
+  const data = await wpClient.request(GET_POSTS);
+  const posts = data.posts.nodes;
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -58,6 +62,17 @@ export default function Home() {
           >
             Documentation
           </a>
+        </div>
+        <div className="mt-16 w-full">
+            <h1>WordPress Posts</h1>
+            <ul>
+              {posts.map((post: any) => (
+                <li key={post.id}>
+                  <h2>{post.title}</h2>
+                  <p dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                </li>
+              ))}
+            </ul>
         </div>
       </main>
     </div>
