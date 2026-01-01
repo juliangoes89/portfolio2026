@@ -17,7 +17,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 93.188.164.226
-          username: root
+          username: www
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "Deploying Next.js application..."
