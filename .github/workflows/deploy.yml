@@ -17,12 +17,12 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 93.188.164.226
-          username: www
+          username: deploy
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "Deploying Next.js application..."
             cd /var/www/portfolio2026
             git pull
-            npm install --production
+            npm install
             npm run build
-            systemctl restart portfolio2026
+            sudo systemctl restart portfolio2026.service
